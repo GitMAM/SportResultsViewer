@@ -1,18 +1,24 @@
 import ComposableArchitecture
 import Foundation
 
-struct SportsFeature: Reducer {
+@Reducer
+struct SportsFeature {
   @ObservableState
   struct State: Equatable {
     var sportResults: IdentifiedArrayOf<DisplayableSportResult> = []
     var isLoading = false
-    var error: String?
     var formattedDate: String?
+    @Presents var alert: AlertState<Action.Alert>?
   }
   
   enum Action: Equatable {
     case getResultsButtonTapped
     case sportResultsResponse(TaskResult<[DisplayableSportResult]>)
+    case alert(PresentationAction<Alert>)
+    
+    enum Alert: Equatable {
+      case error(String)
+    }
   }
   
   @Dependency(\.sportsClient) var sportsClient
@@ -24,7 +30,6 @@ struct SportsFeature: Reducer {
       switch action {
       case .getResultsButtonTapped:
         state.isLoading = true
-        state.error = nil
         state.sportResults = []
         state.formattedDate = nil
         return .run { send in
@@ -42,16 +47,20 @@ struct SportsFeature: Reducer {
               return formattedResult
             }
           )
-        } catch let error {
-          state.error = error.localizedDescription
+        } catch {
+          state.alert = .failedFetching
         }
         return .none
         
-      case let .sportResultsResponse(.failure(error)):
+      case .sportResultsResponse:
         state.isLoading = false
-        state.error = error.localizedDescription
+        state.alert = .failedFetching
+        return .none
+        
+      case .alert:
         return .none
       }
     }
+    .ifLet(\.$alert, action: \.alert)
   }
 }

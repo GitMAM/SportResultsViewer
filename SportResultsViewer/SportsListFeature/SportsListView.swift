@@ -1,115 +1,114 @@
-import ComposableArchitecture
 import SwiftUI
+import ComposableArchitecture
 
 struct SportsResultsView: View {
-  @Bindable private var store: StoreOf<SportsFeature>
-  
-  init(store: StoreOf<SportsFeature>) {
-    self.store = store
-  }
+  @Bindable var store: StoreOf<SportsFeature>
   
   var body: some View {
-    VStack(spacing: 0) {
-      headerView
-      
-      if store.isLoading {
-        loadingView
-      } else if !store.sportResults.isEmpty {
-        resultsView
-      } else {
-        initialView
-      }
-    }
-    .background(Color.secondary)
-    .edgesIgnoringSafeArea(.top)
-  }
-  
-  private var headerView: some View {
-    VStack(spacing: 4) {
-      Text("Sports Results")
-        .font(.system(size: 34, weight: .bold))
-        .foregroundColor(.white)
-      
-      if let formattedDate = store.formattedDate {
-        Text(formattedDate)
-          .font(.system(size: 17))
-          .foregroundColor(.white.opacity(0.8))
-      }
-    }
-    .padding(.top, 44)
-    .padding(.bottom, 16)
-    .frame(maxWidth: .infinity)
-    .background(Color.black.opacity(0.2))
-  }
-  
-  private var loadingView: some View {
-    ProgressView()
-      .scaleEffect(2)
-      .progressViewStyle(CircularProgressViewStyle(tint: .white))
-      .frame(maxWidth: .infinity, maxHeight: .infinity)
-  }
-  
-  private var resultsView: some View {
-    ScrollView {
-      LazyVStack(spacing: 16) {
-        ForEach(store.sportResults) { result in
-          ResultCardView(result: result)
+    NavigationView {
+      ZStack {
+        Color.gray.opacity(0.1).edgesIgnoringSafeArea(.all)
+        
+        VStack {
+          if store.isLoading {
+            ProgressView()
+              .scaleEffect(1.5)
+              .padding()
+          } else if !store.sportResults.isEmpty {
+            List {
+              ForEach(store.sportResults) { result in
+                EnhancedResultRowView(result: result)
+              }
+            }
+            .listStyle(InsetGroupedListStyle())
+          } else {
+            emptyStateView
+          }
+          
+          if store.sportResults.isEmpty {
+            if !store.isLoading {
+              Button("Get Results") {
+                store.send(.getResultsButtonTapped)
+              }
+              .padding()
+              .frame(maxWidth: .infinity)
+              .background(Color.blue)
+              .foregroundColor(.white)
+              .cornerRadius(10)
+              .padding()
+              .disabled(store.isLoading)
+            }
+          }
         }
       }
-      .padding(.horizontal)
-      .padding(.top, 16)
+      .navigationTitle(store.formattedDate ?? "Sports Results")
     }
-    .background(Color.clear)
+    .alert($store.scope(state: \.alert, action: \.alert))
   }
   
-  private var initialView: some View {
-    VStack {
-      Button("Get Results") {
-        store.send(.getResultsButtonTapped)
-      }
-      .padding()
-      .frame(maxWidth: .infinity)
-      .background(Color.white)
-      .foregroundColor(.blue)
-      .cornerRadius(10)
-      .padding()
+  private var emptyStateView: some View {
+    VStack(spacing: 20) {
+      Image(systemName: "sportscourt")
+        .font(.system(size: 50))
+        .foregroundColor(.gray)
+      Text("No results yet")
+        .font(.headline)
+      Text("Tap the Get Results button to load sports results")
+        .font(.subheadline)
+        .foregroundColor(.gray)
+        .multilineTextAlignment(.center)
+        .padding(.horizontal)
     }
-    .frame(maxWidth: .infinity, maxHeight: .infinity)
   }
 }
 
-struct ResultCardView: View {
+struct EnhancedResultRowView: View {
   let result: DisplayableSportResult
-  @State private var isExpanded = true
   
   var body: some View {
-    VStack(alignment: .leading, spacing: 8) {
-      HStack {
+    HStack(spacing: 12) {
+      sportIcon
+      VStack(alignment: .leading, spacing: 4) {
         Text(result.description)
           .font(.headline)
-          .foregroundColor(.black)
-        
-        Spacer()
-        
-        Image(systemName: "chevron.up")
-          .foregroundColor(.blue)
-          .rotationEffect(.degrees(isExpanded ? 180 : 0))
-      }
-      .contentShape(Rectangle())
-      .onTapGesture {
-        withAnimation {
-          isExpanded.toggle()
+        if let date = result.formattedPublicationDate {
+          Text("Published: \(date)")
+            .font(.caption)
+            .foregroundColor(.secondary)
         }
       }
-      
-      if isExpanded, let formattedDate = result.formattedPublicationDate {
-        Text("Publication Date: \(formattedDate)")
-          .font(.subheadline)
-          .foregroundColor(.gray)
+    }
+    .padding(.vertical, 8)
+  }
+  
+  
+  // Ideally this would come from the API, something like sportsType and then we can map it
+  // but unfortantely the api doesn't include that, but I thought just to leave this as a nice touch
+  private var sportIcon: some View {
+    Group {
+      if result.description.contains("Grand Prix") {
+        Image(systemName: "flag.checkered")
+          .foregroundColor(.red)
+      } else if result.description.contains("Roland Garros") {
+        Image(systemName: "tennis.racket")
+          .foregroundColor(.green)
+      } else {
+        Image(systemName: "basketball")
+          .foregroundColor(.orange)
       }
     }
-    .padding()
-    .background(Color.white)
-    .cornerRadius(10)
+    .font(.title2)
+  }
+}
+
+extension AlertState where Action == SportsFeature.Action.Alert {
+  static let failedFetching = Self {
+    TextState("Initial Load Failed")
+  } actions: {
+    ButtonState(role: .cancel) {
+      TextState("OK")
+    }
+  } message: {
+    TextState("Failed to load initial list. Please try again later.")
   }
 }

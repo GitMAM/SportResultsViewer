@@ -15,7 +15,6 @@ final class SportsFeatureTests: XCTestCase {
     
     await store.send(.getResultsButtonTapped) {
       $0.isLoading = true
-      $0.error = nil
       $0.sportResults = []
       $0.formattedDate = nil
     }
@@ -43,7 +42,6 @@ final class SportsFeatureTests: XCTestCase {
     
     await store.send(.getResultsButtonTapped) {
       $0.isLoading = true
-      $0.error = nil
       $0.sportResults = []
       $0.formattedDate = nil
     }
@@ -72,14 +70,13 @@ final class SportsFeatureTests: XCTestCase {
     
     await store.send(.getResultsButtonTapped) {
       $0.isLoading = true
-      $0.error = nil
       $0.sportResults = []
       $0.formattedDate = nil
     }
     
     await store.receive(.sportResultsResponse(.failure(expectedError))) {
       $0.isLoading = false
-      $0.error = expectedError.localizedDescription
+      $0.alert = .failedFetching
     }
   }
   
@@ -95,7 +92,6 @@ final class SportsFeatureTests: XCTestCase {
     
     await store.send(.getResultsButtonTapped) {
       $0.isLoading = true
-      $0.error = nil
       $0.sportResults = []
       $0.formattedDate = nil
     }
@@ -114,7 +110,6 @@ final class SportsFeatureTests: XCTestCase {
     
     XCTAssertTrue(store.state.sportResults.isEmpty)
     XCTAssertFalse(store.state.isLoading)
-    XCTAssertNil(store.state.error)
     XCTAssertNil(store.state.formattedDate)
   }
   
@@ -131,14 +126,13 @@ final class SportsFeatureTests: XCTestCase {
     
     await store.send(.getResultsButtonTapped) {
       $0.isLoading = true
-      $0.error = nil
       $0.sportResults = []
       $0.formattedDate = nil
     }
     
     await store.receive(.sportResultsResponse(.failure(expectedError))) {
       $0.isLoading = false
-      $0.error = expectedError.localizedDescription
+      $0.alert = .failedFetching
     }
   }
   
@@ -155,14 +149,13 @@ final class SportsFeatureTests: XCTestCase {
     
     await store.send(.getResultsButtonTapped) {
       $0.isLoading = true
-      $0.error = nil
       $0.sportResults = []
       $0.formattedDate = nil
     }
     
     await store.receive(.sportResultsResponse(.failure(expectedError))) {
       $0.isLoading = false
-      $0.error = expectedError.localizedDescription
+      $0.alert = .failedFetching
     }
   }
   
@@ -178,7 +171,6 @@ final class SportsFeatureTests: XCTestCase {
     
     await store.send(.getResultsButtonTapped) {
       $0.isLoading = true
-      $0.error = nil
       $0.sportResults = []
       $0.formattedDate = nil
     }
@@ -202,7 +194,6 @@ final class SportsFeatureTests: XCTestCase {
     
     await store.send(.getResultsButtonTapped) {
       $0.isLoading = true
-      $0.error = nil
       $0.sportResults = []
       $0.formattedDate = nil
     }
@@ -226,7 +217,6 @@ final class SportsFeatureTests: XCTestCase {
     
     await store.send(.getResultsButtonTapped) {
       $0.isLoading = true
-      $0.error = nil
       $0.sportResults = []
       $0.formattedDate = nil
     }
