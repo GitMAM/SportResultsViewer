@@ -9,20 +9,19 @@ enum DateFormatterError: Error {
 extension DateFormatterClient: DependencyKey {
   static let liveValue = DateFormatterClient(
     string: { date in
-      guard date.timeIntervalSince1970 >= -62135769600 else {
-        throw DateFormatterError.invalidDate
-      }
-      let formatter = DateFormatter()
-      formatter.dateFormat = "yyyy-MM-dd"
-      return formatter.string(from: date)
+      try Self.formatDate(date, format: "yyyy-MM-dd")
     },
     itemString: { date in
-      guard date.timeIntervalSince1970 >= -62135769600 else {
-        throw DateFormatterError.invalidDate
-      }
-      let formatter = DateFormatter()
-      formatter.dateFormat = "d MMMM yyyy"
-      return formatter.string(from: date)
+      try Self.formatDate(date, format: "d MMMM yyyy")
     }
   )
+  
+  private static func formatDate(_ date: Date, format: String) throws -> String {
+    guard date.timeIntervalSince1970 >= -62135769600 else {
+      throw DateFormatterError.invalidDate
+    }
+    let formatter = DateFormatter()
+    formatter.dateFormat = format
+    return formatter.string(from: date)
+  }
 }
