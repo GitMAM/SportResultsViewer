@@ -1,6 +1,6 @@
 import XCTest
 import Dependencies
-@testable import SportResultsViewer // Replace with your actual module name
+@testable import SportResultsViewer
 
 
 final class DateFormatterClientTests: XCTestCase {
