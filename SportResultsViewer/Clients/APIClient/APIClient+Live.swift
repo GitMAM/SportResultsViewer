@@ -13,7 +13,7 @@ extension APIClient: DependencyKey {
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let (data, response) = try await urlSession.data(for: request)
