@@ -57,8 +57,6 @@ I've broken the app down into these main parts:
 1. [**ComposableArchitecture (TCA)**](https://github.com/pointfreeco/swift-composable-architecture): The Composable Architecture (TCA, for short) is a library for building applications in a consistent and understandable way, with composition, testing, and ergonomics in mind. It can be used in SwiftUI, UIKit, and more, and on any Apple platform (iOS, macOS, visionOS, tvOS, and watchOS).
 Note, all the packages that are installed are part of the architecture package. 
 2. **SwiftUI**: Apple's cool new UI framework. It plays really nice with TCA and made building the interface a breeze.
-3. **Foundation**: Can't build an iOS app without it!
-4. **XCTest**: For making sure everything works as it should.
 
 ## Where'd The Code Come From?
 
