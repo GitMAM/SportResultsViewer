@@ -1,7 +1,6 @@
 import ComposableArchitecture
 import Foundation
 
-// Add this enum to your DateFormatterClient file if not already present
 enum DateFormatterError: Error {
   case invalidDate
 }
