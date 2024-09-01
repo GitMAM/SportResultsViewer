@@ -36,4 +36,11 @@ enum Constants {
     static let f1 = "Grand Prix"
     static let tennis = "Roland Garros"
   }
+  
+  enum API {
+    static let baseURL = "https://restest.free.beeceptor.com/results"
+    static let contentType = "application/json"
+    static let dateFormat = "MMM d, yyyy h:mm:ss a"
+    static let localeIdentifier = "en_US_POSIX"
+  }
 }
