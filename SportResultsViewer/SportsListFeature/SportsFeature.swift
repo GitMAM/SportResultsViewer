@@ -8,6 +8,7 @@ struct SportsFeature {
     var sportResults: IdentifiedArrayOf<DisplayableSportResult> = []
     var isLoading = false
     var formattedDate: String?
+    var shouldShowGetResultsButton: Bool = true
     @Presents var alert: AlertState<Action.Alert>?
   }
   
@@ -32,6 +33,7 @@ struct SportsFeature {
         state.isLoading = true
         state.sportResults = []
         state.formattedDate = nil
+        state.shouldShowGetResultsButton = false
         return .run { send in
           await send(.sportResultsResponse(TaskResult { try await sportsClient.fetchSportResults() }))
         }
@@ -47,14 +49,17 @@ struct SportsFeature {
               return formattedResult
             }
           )
+          state.shouldShowGetResultsButton = state.sportResults.isEmpty
         } catch {
           state.alert = .failedFetching
+          state.shouldShowGetResultsButton = true
         }
         return .none
         
-      case .sportResultsResponse:
+      case .sportResultsResponse(.failure):
         state.isLoading = false
         state.alert = .failedFetching
+        state.shouldShowGetResultsButton = true
         return .none
         
       case .alert:

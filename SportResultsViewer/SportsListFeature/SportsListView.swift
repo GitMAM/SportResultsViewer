@@ -25,19 +25,17 @@ struct SportsResultsView: View {
             emptyStateView
           }
           
-          if store.sportResults.isEmpty {
-            if !store.isLoading {
-              Button("Get Results") {
-                store.send(.getResultsButtonTapped)
-              }
-              .padding()
-              .frame(maxWidth: .infinity)
-              .background(Color.blue)
-              .foregroundColor(.white)
-              .cornerRadius(10)
-              .padding()
-              .disabled(store.isLoading)
+          if store.shouldShowGetResultsButton {
+            Button("Get Results") {
+              store.send(.getResultsButtonTapped)
             }
+            .padding()
+            .frame(maxWidth: .infinity)
+            .background(Color.blue)
+            .foregroundColor(.white)
+            .cornerRadius(10)
+            .padding()
+            .disabled(store.isLoading)
           }
         }
       }

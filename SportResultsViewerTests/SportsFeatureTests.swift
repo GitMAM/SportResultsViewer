@@ -17,6 +17,7 @@ final class SportsFeatureTests: XCTestCase {
       $0.isLoading = true
       $0.sportResults = []
       $0.formattedDate = nil
+      $0.shouldShowGetResultsButton = false
     }
     
     await store.receive(.sportResultsResponse(.success(DisplayableSportResult.mocked))) {
@@ -44,6 +45,7 @@ final class SportsFeatureTests: XCTestCase {
       $0.isLoading = true
       $0.sportResults = []
       $0.formattedDate = nil
+      $0.shouldShowGetResultsButton = false
     }
     
     await store.receive(.sportResultsResponse(.success(DisplayableSportResult.mocked))) {
@@ -72,11 +74,13 @@ final class SportsFeatureTests: XCTestCase {
       $0.isLoading = true
       $0.sportResults = []
       $0.formattedDate = nil
+      $0.shouldShowGetResultsButton = false
     }
     
     await store.receive(.sportResultsResponse(.failure(expectedError))) {
       $0.isLoading = false
       $0.alert = .failedFetching
+      $0.shouldShowGetResultsButton = true
     }
   }
   
@@ -94,12 +98,14 @@ final class SportsFeatureTests: XCTestCase {
       $0.isLoading = true
       $0.sportResults = []
       $0.formattedDate = nil
+      $0.shouldShowGetResultsButton = false
     }
     
     await store.receive(.sportResultsResponse(.success([]))) {
       $0.isLoading = false
       $0.sportResults = []
       $0.formattedDate = "Results for 2024-08-31"
+      $0.shouldShowGetResultsButton = true
     }
   }
   
@@ -128,11 +134,13 @@ final class SportsFeatureTests: XCTestCase {
       $0.isLoading = true
       $0.sportResults = []
       $0.formattedDate = nil
+      $0.shouldShowGetResultsButton = false
     }
     
     await store.receive(.sportResultsResponse(.failure(expectedError))) {
       $0.isLoading = false
       $0.alert = .failedFetching
+      $0.shouldShowGetResultsButton = true
     }
   }
   
@@ -151,11 +159,13 @@ final class SportsFeatureTests: XCTestCase {
       $0.isLoading = true
       $0.sportResults = []
       $0.formattedDate = nil
+      $0.shouldShowGetResultsButton = false
     }
     
     await store.receive(.sportResultsResponse(.failure(expectedError))) {
       $0.isLoading = false
       $0.alert = .failedFetching
+      $0.shouldShowGetResultsButton = true
     }
   }
   
@@ -173,12 +183,14 @@ final class SportsFeatureTests: XCTestCase {
       $0.isLoading = true
       $0.sportResults = []
       $0.formattedDate = nil
+      $0.shouldShowGetResultsButton = false
     }
     
     await store.receive(.sportResultsResponse(.success([]))) {
       $0.isLoading = false
       $0.sportResults = []
       $0.formattedDate = "Results for 2024-08-31"
+      $0.shouldShowGetResultsButton = true
     }
   }
   
@@ -196,6 +208,7 @@ final class SportsFeatureTests: XCTestCase {
       $0.isLoading = true
       $0.sportResults = []
       $0.formattedDate = nil
+      $0.shouldShowGetResultsButton = false
     }
     
     await store.receive(.sportResultsResponse(.success(DisplayableSportResult.mocked))) {
