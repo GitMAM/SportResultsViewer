@@ -1,5 +1,7 @@
 # Sports Results Viewer
 
+https://github.com/user-attachments/assets/4863ac7c-0129-4d31-a79a-1c45656f3c62
+
 Hey there! Welcome to my Sports Results Viewer project. I had fun working on this, and I hope you like looking through it as much as I enjoyed building it.
 
 ## Project Structure
@@ -61,11 +63,11 @@ I've broken the app down into these main parts:
 
 Most of this I wrote from scratch for this project. It's based on my experince working on apps using TCA.
 
-## What I'm Most Proud Of
+## Other
 
 1. **The Architecture**: I really tried to make everything clean and extendable using TCA. It should be pretty easy to add new features down the line.
 
-2. **How I Handle the Data**: seprate client for data transformation `DisplayableSportResultClient`. 
+2. **How the data is handled**: seprate client for data transformation `DisplayableSportResultClient`. 
 
 3. **Tests**: I made sure to add test coverage to the main logic of the app.
 
@@ -78,7 +80,7 @@ If I had more time, here's what I'd love to add:
 3. **Localization**: 
 5. **Accessibility**: Making sure everyone can use the app easily.
 
-## Extra Bits
+## Extras
 
 - I tried to use the latest Swift features where it made sense.
 - The error messages should be helpful for users but also give enough info for debugging.
