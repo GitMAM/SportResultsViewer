@@ -54,7 +54,7 @@ I've broken the app down into these main parts:
 
 ## What I'm Using
 
-1. **ComposableArchitecture (TCA)**: I chose this for managing state and dependencies. It's really helped keep things organized and testable.
+1. *[*ComposableArchitecture (TCA)**](https://github.com/pointfreeco/swift-composable-architecture): I chose this for managing state and dependencies. It's really helped keep things organized and testable.
 2. **SwiftUI**: Apple's cool new UI framework. It plays really nice with TCA and made building the interface a breeze.
 3. **Foundation**: Can't build an iOS app without it!
 4. **XCTest**: For making sure everything works as it should.
