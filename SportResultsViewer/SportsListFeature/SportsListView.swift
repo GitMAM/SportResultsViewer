@@ -98,15 +98,3 @@ struct EnhancedResultRowView: View {
     .font(.title2)
   }
 }
-
-extension AlertState where Action == SportsFeature.Action.Alert {
-  static let failedFetching = Self {
-    TextState("Initial Load Failed")
-  } actions: {
-    ButtonState(role: .cancel) {
-      TextState("OK")
-    }
-  } message: {
-    TextState("Failed to load initial list. Please try again later.")
-  }
-}
