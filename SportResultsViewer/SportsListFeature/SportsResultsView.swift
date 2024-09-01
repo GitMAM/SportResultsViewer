@@ -20,7 +20,7 @@ struct SportsResultsView: View {
           } else if !store.sportResults.isEmpty {
             List {
               ForEach(store.sportResults) { result in
-                EnhancedResultRowView(result: result)
+                ResultRowView(result: result)
               }
             }
             .listStyle(InsetGroupedListStyle())
@@ -63,7 +63,7 @@ struct SportsResultsView: View {
   }
 }
 
-struct EnhancedResultRowView: View {
+struct ResultRowView: View {
   let result: DisplayableSportResult
   
   var body: some View {
