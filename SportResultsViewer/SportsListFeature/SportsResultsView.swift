@@ -10,12 +10,12 @@ struct SportsResultsView: View {
   var body: some View {
     NavigationView {
       ZStack {
-        Color.gray.opacity(0.1).edgesIgnoringSafeArea(.all)
+        Constants.UI.backgroundColor.edgesIgnoringSafeArea(.all)
         
         VStack {
           if store.isLoading {
             ProgressView()
-              .scaleEffect(1.5)
+              .scaleEffect(Constants.UI.progressViewScale)
               .padding()
           } else if !store.sportResults.isEmpty {
             List {
@@ -29,32 +29,32 @@ struct SportsResultsView: View {
           }
           
           if store.shouldShowGetResultsButton {
-            Button("Get Results") {
+            Button(Constants.Text.getResultsButton) {
               store.send(.getResultsButtonTapped)
             }
             .padding()
             .frame(maxWidth: .infinity)
             .background(Color.blue)
             .foregroundColor(.white)
-            .cornerRadius(10)
+            .cornerRadius(Constants.UI.cornerRadius)
             .padding()
             .disabled(store.isLoading)
           }
         }
       }
-      .navigationTitle(store.formattedDate ?? "Sports Results")
+      .navigationTitle(store.formattedDate ?? Constants.Text.navigationTitle)
     }
     .alert($store.scope(state: \.alert, action: \.alert))
   }
   
   private var emptyStateView: some View {
-    VStack(spacing: 20) {
-      Image(systemName: "sportscourt")
-        .font(.system(size: 50))
+    VStack(spacing: Constants.UI.defaultPadding) {
+      Image(systemName: Constants.Images.emptyState)
+        .font(.system(size: Constants.UI.iconSize))
         .foregroundColor(.gray)
-      Text("No results yet")
+      Text(Constants.Text.emptyStateTitle)
         .font(.headline)
-      Text("Tap the Get Results button to load sports results")
+      Text(Constants.Text.emptyStateDescription)
         .font(.subheadline)
         .foregroundColor(.gray)
         .multilineTextAlignment(.center)
@@ -67,35 +67,32 @@ struct EnhancedResultRowView: View {
   let result: DisplayableSportResult
   
   var body: some View {
-    HStack(spacing: 12) {
+    HStack(spacing: Constants.UI.rowSpacing) {
       sportIcon
       VStack(alignment: .leading, spacing: 4) {
         Text(result.description)
           .font(.headline)
         if let date = result.formattedPublicationDate {
-          Text("Published: \(date)")
+          Text("\(Constants.Text.publishedPrefix)\(date)")
             .font(.caption)
             .foregroundColor(.secondary)
         }
       }
     }
-    .padding(.vertical, 8)
+    .padding(.vertical, Constants.UI.rowVerticalPadding)
   }
   
-  
-  // Ideally this would come from the API, something like sportsType and then we can map it
-  // but unfortantely the api doesn't include that, but I thought just to leave this as a nice touch
   private var sportIcon: some View {
     Group {
-      if result.description.contains("Grand Prix") {
-        Image(systemName: "flag.checkered")
-          .foregroundColor(.red)
-      } else if result.description.contains("Roland Garros") {
-        Image(systemName: "tennis.racket")
-          .foregroundColor(.green)
+      if result.description.contains(Constants.SportKeywords.f1) {
+        Image(systemName: Constants.Images.f1)
+          .foregroundColor(Constants.Colors.f1)
+      } else if result.description.contains(Constants.SportKeywords.tennis) {
+        Image(systemName: Constants.Images.tennis)
+          .foregroundColor(Constants.Colors.tennis)
       } else {
-        Image(systemName: "basketball")
-          .foregroundColor(.orange)
+        Image(systemName: Constants.Images.basketball)
+          .foregroundColor(Constants.Colors.basketball)
       }
     }
     .font(.title2)

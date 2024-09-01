@@ -12,6 +12,7 @@
 		D32D00E82C83617A00B48084 /* APIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D00E72C83617A00B48084 /* APIClientTests.swift */; };
 		D32D00EA2C83646000B48084 /* APIClient+Live.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32D00E92C83646000B48084 /* APIClient+Live.swift */; };
 		D33AC79B2C83B0BE007457BE /* DateFromatterClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33AC79A2C83B0BE007457BE /* DateFromatterClientTests.swift */; };
+		D343BD902C84D24900D73AB8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D343BD8F2C84D24900D73AB8 /* Constants.swift */; };
 		D399D1462C82338E00A4E016 /* SportResultsViewerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D399D1452C82338E00A4E016 /* SportResultsViewerApp.swift */; };
 		D399D14A2C82339200A4E016 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D399D1492C82339200A4E016 /* Assets.xcassets */; };
 		D399D14D2C82339200A4E016 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D399D14C2C82339200A4E016 /* Preview Assets.xcassets */; };
@@ -45,6 +46,7 @@
 		D32D00E72C83617A00B48084 /* APIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientTests.swift; sourceTree = "<group>"; };
 		D32D00E92C83646000B48084 /* APIClient+Live.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIClient+Live.swift"; sourceTree = "<group>"; };
 		D33AC79A2C83B0BE007457BE /* DateFromatterClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFromatterClientTests.swift; sourceTree = "<group>"; };
+		D343BD8F2C84D24900D73AB8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D399D1422C82338E00A4E016 /* SportResultsViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportResultsViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D399D1452C82338E00A4E016 /* SportResultsViewerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportResultsViewerApp.swift; sourceTree = "<group>"; };
 		D399D1492C82339200A4E016 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			children = (
 				D399D1792C823B9900A4E016 /* SportsFeature.swift */,
 				D399D17C2C823BC000A4E016 /* SportsResultsView.swift */,
+				D343BD8F2C84D24900D73AB8 /* Constants.swift */,
 			);
 			path = SportsListFeature;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				D32D00EA2C83646000B48084 /* APIClient+Live.swift in Sources */,
 				D399D1722C8234E000A4E016 /* SportsClient.swift in Sources */,
 				D3BC48332C83A86200695E86 /* DateFormatterClient.swift in Sources */,
+				D343BD902C84D24900D73AB8 /* Constants.swift in Sources */,
 				D399D18F2C832E2C00A4E016 /* DisplayableSportResultClient.swift in Sources */,
 				D399D1762C82399C00A4E016 /* Models.swift in Sources */,
 			);

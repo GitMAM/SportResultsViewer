@@ -54,7 +54,7 @@ struct TennisResult: Codable {
   }
 }
 
-// Extension to make all results conform to a common protocol
+// Extension to make all results conform to a common protocol for extendibility
 protocol SportResult {
   var publicationDate: Date { get }
   var tournament: String { get }
