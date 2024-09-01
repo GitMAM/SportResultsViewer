@@ -6,8 +6,15 @@ enum HTTPMethod: String {
   case post = "POST"
 }
 
+/// A client for making API requests to fetch sports results data.
+///
+/// This client handles the low-level networking details and JSON decoding.
 @DependencyClient
 struct APIClient {
+  /// Fetches raw sports results data from the API.
+  ///
+  /// - Returns: A `SportResults` object containing the fetched data.
+  /// - Throws: An error if the network request fails or if the response cannot be decoded.
   var fetchSportsResults: @Sendable () async throws -> SportResults
 }
 

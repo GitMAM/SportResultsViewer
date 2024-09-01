@@ -1,5 +1,9 @@
 import Foundation
 
+/// Defines the data models used in the Sports Results app.
+///
+/// These models represent the structure of the data received from the API and the transformed data used in the UI.
+
 // Top-level structure
 struct SportResults: Codable {
   let f1Results: [F1Result]

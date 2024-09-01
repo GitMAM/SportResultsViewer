@@ -1,6 +1,9 @@
 import SwiftUI
 import ComposableArchitecture
 
+/// The main view for displaying sports results.
+///
+/// This view uses SwiftUI and integrates with The Composable Architecture to display and manage sports results.
 struct SportsResultsView: View {
   @Bindable var store: StoreOf<SportsFeature>
   

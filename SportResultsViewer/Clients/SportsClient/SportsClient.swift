@@ -1,10 +1,15 @@
 import Foundation
 import ComposableArchitecture
 
-// MARK: - SportsClient Dependency
-/// A client for fetching and transforming sports results data.
+/// A client for fetching sports results data from the API.
+///
+/// This client uses the `@DependencyClient` property wrapper from TCA to allow for easy mocking in tests.
 @DependencyClient
 struct SportsClient {
+  /// Fetches the latest sports results from the API.
+  ///
+  /// - Returns: An array of `DisplayableSportResult` objects.
+  /// - Throws: An error if the fetch operation fails.
   var fetchSportResults: @Sendable () async throws -> [DisplayableSportResult]
 }
 

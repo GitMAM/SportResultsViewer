@@ -1,9 +1,23 @@
 import ComposableArchitecture
 import Foundation
 
+/// A client for transforming raw sports results into displayable format.
+///
+/// This client handles the business logic of converting API data into a format suitable for display in the UI.
 @DependencyClient
 struct DisplayableSportResultClient {
+  /// Transforms an array of `SportResult` objects into `DisplayableSportResult` objects.
+  ///
+  /// - Parameter sportResults: An array of `SportResult` objects to transform.
+  /// - Returns: An array of `DisplayableSportResult` objects.
+  /// - Throws: An error if the transformation fails.
   var transform: @Sendable ([SportResult]) async throws -> [DisplayableSportResult]
+  
+  /// Filters an array of `DisplayableSportResult` objects to only include results from the most recent day.
+  ///
+  /// - Parameter results: An array of `DisplayableSportResult` objects to filter.
+  /// - Returns: An array of `DisplayableSportResult` objects from the most recent day.
+  /// - Throws: An error if the filtering operation fails.
   var filterSameDay: @Sendable ([DisplayableSportResult]) async throws -> [DisplayableSportResult]
 }
 

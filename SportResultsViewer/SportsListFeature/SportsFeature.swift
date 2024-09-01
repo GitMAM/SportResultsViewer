@@ -1,8 +1,13 @@
 import ComposableArchitecture
 import Foundation
 
+/// The core feature of the Sports Results app, managing the state and business logic for fetching and displaying sports results.
+///
+/// This feature uses The Composable Architecture (TCA) to manage state, handle user actions, and coordinate with dependencies.
+
 @Reducer
 struct SportsFeature {
+  /// Represents the current state of the Sports Results feature.
   @ObservableState
   struct State: Equatable {
     var sportResults: IdentifiedArrayOf<DisplayableSportResult> = []
@@ -12,6 +17,7 @@ struct SportsFeature {
     @Presents var alert: AlertState<Action.Alert>?
   }
   
+  /// Defines the actions that can occur within the Sports Results feature.
   enum Action: Equatable {
     case getResultsButtonTapped
     case sportResultsResponse(TaskResult<[DisplayableSportResult]>)
@@ -26,6 +32,10 @@ struct SportsFeature {
   @Dependency(\.date.now) var now
   @Dependency(\.dateFormatter) var dateFormatter
   
+  
+  /// The core logic and behavior of the Sports Results feature.
+  ///
+  /// This reducer handles user actions, updates state, and manages side effects like API calls.
   var body: some ReducerOf<Self> {
     Reduce { state, action in
       switch action {
