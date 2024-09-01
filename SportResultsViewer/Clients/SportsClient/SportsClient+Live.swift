@@ -1,6 +1,7 @@
 import ComposableArchitecture
 import Foundation
 
+// MARK: - SportsClient Live Implementation
 extension SportsClient: DependencyKey {
   static let liveValue: SportsClient = {
     @Dependency(\.apiClient) var apiClient
